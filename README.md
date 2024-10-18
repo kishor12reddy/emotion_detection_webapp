@@ -1,7 +1,3 @@
-Here's a sample README file you can use for your GitHub project:
-
----
-
 # 🎭 Emotion Detection & Music Recommendation
 
 This project detects human emotions in real-time using a Convolutional Neural Network (CNN) and recommends songs based on the detected emotion. The application uses a webcam feed to capture faces, classifies emotions such as happy, sad, angry, and more, and then provides a list of mood-matching songs.
@@ -18,7 +14,7 @@ This project detects human emotions in real-time using a Convolutional Neural Ne
 - **Song Recommendations**: After detecting the user's emotion, the program suggests a playlist of songs tailored to that mood.
   
 ## 📂 Dataset
-The emotion detection model is trained on the [FER-2013 dataset](https://www.kaggle.com/datasets/msambare/fer2013), which contains 48x48 pixel grayscale images of human faces categorized into 7 emotion classes:
+The emotion detection model is trained on the **RAF-DB (Real-world Affective Faces Database)**, which contains diverse facial expressions annotated for 7 basic emotions:
 - Angry
 - Disgust
 - Fear
@@ -26,6 +22,8 @@ The emotion detection model is trained on the [FER-2013 dataset](https://www.kag
 - Neutral
 - Sad
 - Surprise
+
+You can download the RAF-DB dataset from [here](http://www.whdeng.cn/RAF/model1.html).
 
 ## 🧠 Model Architecture
 The model uses a Convolutional Neural Network (CNN) with the following layers:
@@ -44,8 +42,8 @@ The model uses a Convolutional Neural Network (CNN) with the following layers:
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/emotion-detection-music-recommendation.git
-   cd emotion-detection-music-recommendation
+   git clone https://github.com/kishor12reddy/emotion-detection-webapp
+   cd emotion-detection-webapp
    ```
 
 2. **Install the required libraries**:
@@ -55,10 +53,10 @@ The model uses a Convolutional Neural Network (CNN) with the following layers:
    ```
 
 3. **Download and prepare the dataset**:
-   - Download the [FER-2013 dataset](https://www.kaggle.com/datasets/msambare/fer2013) and extract it into your local directory.
-   - Organize the dataset as follows:
+   - Download the **RAF-DB dataset** from the official website: [RAF-DB Dataset](http://www.whdeng.cn/RAF/model1.html)
+   - Extract the dataset into your local directory and organize it like this:
      ```
-     FER-2013/
+     RAF-DB/
        ├── train/
            ├── angry/
            ├── disgust/
@@ -83,7 +81,7 @@ The model uses a Convolutional Neural Network (CNN) with the following layers:
    ```
 
 ## 🎶 Song Recommendation
-The program recommends songs based on the detected emotion, using predefined playlists in the following categories:
+The program recommends songs based on the detected emotion, using predefined playlists in the following categories:. You can also add songs according to your wish
 - **Happy**: "Happy - Pharrell Williams", "Uptown Funk - Mark Ronson feat. Bruno Mars", etc.
 - **Sad**: "Someone Like You - Adele", "Fix You - Coldplay", etc.
 - **Angry**: "Killing in the Name - Rage Against the Machine", etc.
@@ -99,17 +97,7 @@ The program recommends songs based on the detected emotion, using predefined pla
 - Expand the song recommendation playlists with more diverse options.
 - Improve the emotion detection accuracy by using a more complex model.
 - Add support for detecting multiple faces and emotions simultaneously.
-  
-## 📜 License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
----
-
 ## 🧑‍💻 Author
-- **Your Name** - [Your GitHub Profile](https://github.com/yourusername)
+- **Your Name** - https://github.com/kishor12reddy
 
 Feel free to contribute to this project by submitting issues or pull requests!
-
----
-
-This README covers the key aspects of your project, including setup, usage, and future improvements. You can adapt it to fit the specifics of your project further if needed!
