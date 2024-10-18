@@ -98,6 +98,6 @@ The program recommends songs based on the detected emotion, using predefined pla
 - Improve the emotion detection accuracy by using a more complex model.
 - Add support for detecting multiple faces and emotions simultaneously.
 ## 🧑‍💻 Author
-- **Your Name** - https://github.com/kishor12reddy
+https://github.com/kishor12reddy
 
 Feel free to contribute to this project by submitting issues or pull requests!
