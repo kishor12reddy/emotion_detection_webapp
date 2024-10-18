@@ -38,30 +38,43 @@
             "neutral": ["Weightless - Marconi Union", "YouTube Link 6"],
             "disgust": ["Mad World - Gary Jules", "YouTube Link 7"],
         };
-
+    
         const songList = document.getElementById('song-list');
         let lastEmotion = '';
-
+    
         setInterval(() => {
-            fetch('/video_feed').then(response => {
-                const emotion = response.headers.get('Emotion');
-                if (emotion && emotion !== lastEmotion) {
-                    lastEmotion = emotion;
-                    songList.innerHTML = ''; // Clear previous songs
-                    const songs = songRecommendations[emotion];
-                    songs.forEach(song => {
-                        const li = document.createElement('li');
-                        li.textContent = song[0]; // Display song name
-                        const link = document.createElement('a');
-                        link.href = song[1]; // Link to YouTube
-                        link.target = "_blank"; // Open in new tab
-                        link.textContent = ' (Watch)';
-                        li.appendChild(link);
-                        songList.appendChild(li);
-                    });
-                }
-            });
+            fetch('/get_emotion')  // Fetch the latest emotion from the new endpoint
+                .then(response => response.json())  // Parse JSON response
+                .then(data => {
+                    const emotion = data.emotion;  // Get the emotion from the response
+                    if (emotion && emotion !== lastEmotion) {
+                        lastEmotion = emotion;
+                        songList.innerHTML = ''; // Clear previous songs
+                        const songs = songRecommendations[emotion];
+    
+                        if (songs) {
+                            songs.forEach(song => {
+                                const li = document.createElement('li');
+                                li.textContent = song[0]; // Display song name
+                                const link = document.createElement('a');
+                                link.href = song[1]; // Link to YouTube
+                                link.target = "_blank"; // Open in new tab
+                                link.textContent = ' (Watch)';
+                                li.appendChild(link);
+                                songList.appendChild(li);
+                            });
+                        } else {
+                            songList.innerHTML = `<li>No song recommendations available for emotion: ${emotion}</li>`;
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching emotion data:', error);
+                    songList.innerHTML = '<li>Error fetching song recommendations. Please try again later.</li>';
+                });
         }, 2000); // Check for new emotion every 2 seconds
     </script>
+    
+    
 </body>
 </html>
