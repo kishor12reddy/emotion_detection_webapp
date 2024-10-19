@@ -2,10 +2,8 @@ import numpy as np
 import cv2
 from tensorflow.keras.models import load_model
 
-# Load the pre-trained emotion detection model
 model = load_model('emotion_model.h5')
 
-# Define a dictionary that maps class labels to emotions
 emotion_dict = {
     0: "angry",
     1: "disgust",
@@ -16,7 +14,6 @@ emotion_dict = {
     6: "surprise",
 }
 
-# Song recommendation dictionary based on emotion
 song_recommendations = {
     "happy": ["Happy - Pharrell Williams",
         "Walking on Sunshine - Katrina and the Waves",
@@ -62,34 +59,28 @@ song_recommendations = {
         "Take a Bow - Rihanna"],
 }
 
-# Function to detect faces and emotions
 def detect_emotion(frame):
     gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    
-    # Use a pre-trained face detector (Haar Cascade)
+
     face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
-    
-    # Detect faces
+
     faces = face_cascade.detectMultiScale(gray_frame, scaleFactor=1.3, minNeighbors=5)
     
     for (x, y, w, h) in faces:
         roi_gray = gray_frame[y:y + h, x:x + w]
-        
-        # Resize to the size used during training, e.g., 128x128 for RGB images
+
         resized_frame = cv2.resize(roi_gray, (128, 128))  # Change this size
 
-        # Convert grayscale to RGB
         rgb_frame = cv2.cvtColor(resized_frame, cv2.COLOR_GRAY2RGB)  # Ensure it's 3 channels
-        
-        # Normalize and reshape
+
         normalized_frame = rgb_frame.astype("float32") / 255.0
         reshaped_frame = np.reshape(normalized_frame, (1, 128, 128, 3))  # Ensure shape is (1, 128, 128, 3)
 
-        # Predict the emotion
+
         predictions = model.predict(reshaped_frame)
         emotion_index = np.argmax(predictions)
 
-        # Draw a rectangle around the face and put the predicted emotion
+
         cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
         cv2.putText(frame, emotion_dict[emotion_index], (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
         
@@ -98,11 +89,10 @@ def detect_emotion(frame):
     return None, frame
 
 
-# Function to recommend songs based on the detected emotion
 def recommend_song(emotion):
     return song_recommendations.get(emotion, ["No song recommendation available"])
 
-# Initialize webcam feed
+
 cap = cv2.VideoCapture(0)
 
 # Set desired window size for display
