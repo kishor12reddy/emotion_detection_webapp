@@ -95,7 +95,6 @@ def recommend_song(emotion):
 
 cap = cv2.VideoCapture(0)
 
-# Set desired window size for display
 desired_width = 800
 desired_height = 600
 
@@ -106,7 +105,6 @@ while True:
         print("Failed to capture video feed.")
         break
 
-    # Detect emotion
     emotion, frame_with_emotion = detect_emotion(frame)
     
     if emotion:
@@ -114,7 +112,6 @@ while True:
         songs = recommend_song(emotion)
         print(f"Recommended songs: {songs}")
         
-        # Display recommended songs on the frame
         for i, song in enumerate(songs):
             cv2.putText(frame_with_emotion, song, (10, 30 + i * 30), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 1)
 
